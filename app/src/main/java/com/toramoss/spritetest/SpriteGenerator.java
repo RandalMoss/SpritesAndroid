@@ -11,17 +11,18 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class SpriteGenerator {
-    public static final double ENEMY_OCCURENCE = .999;
-    public static final double ITEM_OCCURENCE = 0.15;
-    public static final double WEAPON_OCCURENCE = 0.1;
-    public static final double ARMOR_OCCURENCE = 0.05;
-    public static final double CHARACTER_OCCURENCE = 0.001;
+    public static final double ENEMY_OCCURRENCE = .999;
+    public static final double ITEM_OCCURRENCE = 0.25;
+    public static final double WEAPON_OCCURRENCE = 0.2;
+    public static final double ARMOR_OCCURRENCE = 0.1;
+    public static final double CHARACTER_OCCURRENCE = 0.001;
 
     public static ArrayList<ArrayList<? extends Sprite>> sprites = new ArrayList<ArrayList<? extends Sprite>>();
-    public static String[] prefixes = {"Otherworldly", "God Like", "Supreme", "Great", "Plain", "Sad", "Broken", "Putrid", "Talking"};
-    public static String[] suffixes = {"of Sandwich Making", "of Brilliance", "of the Wolf", "of the Fox", "of Sadness",
-                                        "of Otherworldlyness", "of God Likeness", "of Supremeness", "of Greatness", "of Plainness",
-                                        "of Brokenness", "of Putridness", "of Blabbermouth", "of Wretchedness"};
+    public static String[] prefixes = {"Omnipotent", "God Like", "Supreme", "Great", "Plain", "Sad", "Broken", "Putrid", "Talking"};
+    public static String[] suffixes = {"of Sandwich Making", "of Brilliance", "of The Wolf", "of The Fox", "of Sadness",
+                                        "of Otherworldlyness", "of The Divine", "of Supremacy", "of Greatness", "of Plainness",
+                                        "of Brokenness", "of Putridness", "of Blabbermouth", "of Wretchedness", "of the Deep",
+                                        ""};
 
     public static boolean hasLoaded = false;
     
@@ -29,27 +30,27 @@ public class SpriteGenerator {
         Random r = new Random();
         double percentage = r.nextDouble();
 
-        if(percentage <= CHARACTER_OCCURENCE){
+        if(percentage <= CHARACTER_OCCURRENCE){
 //            int characterPos = barcode % sprites.get(4).size();
 //            return characterGenerator(characterPos);
-
+            Log.i("Sprite", "Holy carp a character was born!");
             //TODO generate character
 
         }
-        else if(percentage <= ARMOR_OCCURENCE){
-            int armorPos = barcode % sprites.get(3).size();
+        else if(percentage <= ARMOR_OCCURRENCE){
+            int armorPos = toPositiveModulo(barcode % sprites.get(3).size(), sprites.get(3).size());
             return armorGenerator(armorPos);
         }
-        else if(percentage <= WEAPON_OCCURENCE){
-            int weaponPos = barcode % sprites.get(2).size();
+        else if(percentage <= WEAPON_OCCURRENCE){
+            int weaponPos = toPositiveModulo(barcode % sprites.get(2).size(), sprites.get(2).size());
             return weaponGenerator(weaponPos);
         }
-        else if(percentage <= ITEM_OCCURENCE){
-            int itemPos = barcode % sprites.get(1).size();
+        else if(percentage <= ITEM_OCCURRENCE){
+            int itemPos = toPositiveModulo(barcode % sprites.get(1).size(), sprites.get(1).size());
             return itemGenerator(itemPos);
         }
-        else if(percentage <= ENEMY_OCCURENCE){
-            int enemyPos = barcode % sprites.get(0).size();
+        else if(percentage <= ENEMY_OCCURRENCE){
+            int enemyPos = toPositiveModulo(barcode % sprites.get(0).size(), sprites.get(0).size());
             return enemyGenerator(enemyPos);
         }
         return null;
@@ -162,6 +163,14 @@ public class SpriteGenerator {
             return prefixes[8];
         }
         return prefixes[7];
+    }
+
+    public static int toPositiveModulo(int num, int modulo){
+        int posNum = num;
+        while(posNum < 0){
+            posNum += modulo;
+        }
+        return posNum;
     }
 
     public static void initDrawables(Resources r, int drawableWidth, int drawableHeight){
@@ -375,9 +384,61 @@ public class SpriteGenerator {
         Weapon wep21 = new Weapon(r, drawable, "Aeon Blade", drawableWidth, drawableHeight);
         weapons.add(wep21);
 
-        drawable = r.getDrawable(R.drawable.boss1);
-        Enemy boss1 = new Enemy(r, drawable, "Rel\'kan", drawableWidth, drawableHeight);
-        enemies.add(boss1);
+//        drawable = r.getDrawable(R.drawable.boss1);
+//        Enemy boss1 = new Enemy(r, drawable, "Rel\'kan", drawableWidth, drawableHeight);
+//        enemies.add(boss1);
+
+        drawable = r.getDrawable(R.drawable.enemy1);
+        Enemy enemy1 = new Enemy(r, drawable, "Clay Giant", drawableWidth, drawableHeight);
+        enemies.add(enemy1);
+
+        drawable = r.getDrawable(R.drawable.enemy2);
+        Enemy enemy2 = new Enemy(r, drawable, "Demon Squid", drawableWidth, drawableHeight);
+        enemies.add(enemy2);
+
+        drawable = r.getDrawable(R.drawable.enemy3);
+        Enemy enemy3 = new Enemy(r, drawable, "Harpie", drawableWidth, drawableHeight);
+        enemies.add(enemy3);
+
+        drawable = r.getDrawable(R.drawable.enemy4);
+        Enemy enemy4 = new Enemy(r, drawable, "Rat Wizard", drawableWidth, drawableHeight);
+        enemies.add(enemy4);
+
+        drawable = r.getDrawable(R.drawable.enemy5);
+        Enemy enemy5 = new Enemy(r, drawable, "Green Dragon", drawableWidth, drawableHeight);
+        enemies.add(enemy5);
+
+        drawable = r.getDrawable(R.drawable.enemy6);
+        Enemy enemy6 = new Enemy(r, drawable, "Wyvern", drawableWidth, drawableHeight);
+        enemies.add(enemy6);
+
+        drawable = r.getDrawable(R.drawable.enemy7);
+        Enemy enemy7 = new Enemy(r, drawable, "Orc Warrior", drawableWidth, drawableHeight);
+        enemies.add(enemy7);
+
+        drawable = r.getDrawable(R.drawable.enemy8);
+        Enemy enemy8 = new Enemy(r, drawable, "Lion Solider", drawableWidth, drawableHeight);
+        enemies.add(enemy8);
+
+        drawable = r.getDrawable(R.drawable.enemy9);
+        Enemy enemy9 = new Enemy(r, drawable, "Cloud Dragon", drawableWidth, drawableHeight);
+        enemies.add(enemy9);
+
+        drawable = r.getDrawable(R.drawable.enemy10);
+        Enemy enemy10 = new Enemy(r, drawable, "Gargoyle", drawableWidth, drawableHeight);
+        enemies.add(enemy10);
+
+        drawable = r.getDrawable(R.drawable.enemy11);
+        Enemy enemy11 = new Enemy(r, drawable, "Pumpkin \'o Doom", drawableWidth, drawableHeight);
+        enemies.add(enemy11);
+
+        drawable = r.getDrawable(R.drawable.enemy12);
+        Enemy enemy12 = new Enemy(r, drawable, "Crystal Juggernaut", drawableWidth, drawableHeight);
+        enemies.add(enemy12);
+
+        drawable = r.getDrawable(R.drawable.enemy13);
+        Enemy enemy13 = new Enemy(r, drawable, "Beholder", drawableWidth, drawableHeight);
+        enemies.add(enemy13);
 
         sprites.add(enemies);
         sprites.add(items);
